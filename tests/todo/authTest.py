@@ -19,3 +19,5 @@ class AuthTest(unittest.TestCase):
     def test(self):
         account = AccountPage(self.driver)
         account.open()
+        login_form = account.form
+        account.Actions.sign_in(login_form, "mbykhovetss", "1593572846biem")

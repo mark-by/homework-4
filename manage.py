@@ -6,9 +6,11 @@ import subprocess
 import unittest
 
 import settings
-from tests.todo import AuthTest
+from tests.todo import AuthTest, TodoTest
 
-TESTS = [AuthTest]
+TESTS = [
+    TodoTest
+]
 
 
 def run_tests(tests: List):
