@@ -2,10 +2,9 @@ import os
 import unittest
 from .pages import AccountPage, TodoPage
 from .utils import get_driver
-import time
 
 
-class TodoTest(unittest.TestCase):
+class TaskListTest(unittest.TestCase):
     def setUp(self):
         self.driver = get_driver()
         account = AccountPage(self.driver)
@@ -19,6 +18,7 @@ class TodoTest(unittest.TestCase):
     def tearDown(self) -> None:
         if self.clear is not None:
             self.clear()
+            self.clear = None
 
         self.driver.quit()
 
@@ -27,9 +27,9 @@ class TodoTest(unittest.TestCase):
         task_list = self.page.task_list
         task_list.fill_description(description_content)
         self.driver.refresh()
-        self.assertEqual(description_content, task_list.get_description())
         self.clear = lambda: task_list.clear_description()
-        task_list.clear_description()
+        task_list.wait_description(description_content)
+        self.assertEqual(description_content, task_list.get_description())
 
     def test_change_title(self):
         title_content = 'Some title'
@@ -37,6 +37,5 @@ class TodoTest(unittest.TestCase):
         task_list.fill_title(title_content)
         self.driver.refresh()
         self.clear = lambda: task_list.clear_title()
+        task_list.wait_title(title_content)
         self.assertEqual(title_content, task_list.get_title())
-        task_list.clear_title()
-

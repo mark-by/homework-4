@@ -1,6 +1,8 @@
 import os
 from selenium.webdriver import Remote, DesiredCapabilities
 
+from tests.todo.pages import AccountPage, TodoPage
+
 
 def get_driver():
     browser = os.environ.get('BROWSER', 'CHROME')

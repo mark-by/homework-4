@@ -1,2 +1,3 @@
 from .authTest import AuthTest
-from .todoTest import TodoTest
+from .taskList import TaskListTest
+from .TaskTest import TaskTest
