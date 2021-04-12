@@ -6,11 +6,6 @@ import subprocess
 import unittest
 
 import settings
-from tests.todo import AuthTest, TodoTest
-
-TESTS = [
-    TodoTest
-]
 
 
 def run_tests(tests: List):
@@ -42,7 +37,7 @@ def run_selenium():
 if __name__ == '__main__':
     if len(sys.argv) > 1:
         if sys.argv[1] == 'test':
-            run_tests(TESTS)
+            run_tests(settings.TESTS)
         elif sys.argv[1] == 'run_selenium':
             run_selenium()
     print("Usage: python manage.py [test, run_selenium]")

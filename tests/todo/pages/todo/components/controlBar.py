@@ -1,5 +1,20 @@
+from selenium.webdriver.common.by import By
+
 from testutils import Component
 
 
 class ControlBar(Component):
-    pass
+    container = '[class^="Sidebar_base"]'
+
+    class Selectors:
+        create_list_input = '[class^="CreateInput_base"] input'
+        task_list = lambda name: f'//li[starts-with(@class, "SidebarCustoms_item")]//p[text()="{name}"]'
+
+    def create_list(self, title):
+        self._wait_clickable(By.CSS_SELECTOR, self.container + ' ' + self.Selectors.create_list_input)
+        self._fill_input(By.CSS_SELECTOR, self.container + ' ' + self.Selectors.create_list_input, title, True)
+
+    def open_task_list(self, title):
+        self._wait_visible(By.XPATH, self.Selectors.task_list(title))
+        # self._wait_clickable(By.XPATH, self.Selectors.task_list(title))
+        self.driver.find_element_by_xpath(self.Selectors.task_list(title)).click()
