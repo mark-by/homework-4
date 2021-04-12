@@ -6,5 +6,5 @@ SELENIUM_BIN = 'bin/selenium.jar'
 
 TESTS = [
     TaskTest,
-    # TaskListTest
+    TaskListTest
 ]

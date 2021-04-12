@@ -2,7 +2,7 @@ from .utils import TodoTest
 
 
 class TaskTest(TodoTest):
-    def _test_create_task(self):
+    def test_create_task(self):
         task_name = 'Some task name'
         task_list = self.page.task_list
 
@@ -11,7 +11,7 @@ class TaskTest(TodoTest):
         task = tasks[0]
         self.assertEqual(task_name, task.get_text())
 
-    def _test_toggle_task(self):
+    def test_toggle_task(self):
         task_name = 'Some task name'
         task_list = self.page.task_list
         task_list.create_task(task_name)
@@ -19,7 +19,7 @@ class TaskTest(TodoTest):
         task.toggle()
         self.assertTrue(task.is_checked())
 
-    def _test_set_priority(self):
+    def test_set_priority(self):
         task_name = 'Some task name'
         task_list = self.page.task_list
         task_list.create_task(task_name)

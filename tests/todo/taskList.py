@@ -2,7 +2,7 @@ from .utils import TodoTest
 
 
 class TaskListTest(TodoTest):
-    def _test_change_description(self):
+    def test_change_description(self):
         description_content = 'Some description'
         task_list = self.page.task_list
         task_list.fill_description(description_content)
