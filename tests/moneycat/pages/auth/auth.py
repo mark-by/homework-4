@@ -8,12 +8,14 @@ class AuthPage(Page):
 
     class Actions:
         @staticmethod
-        def sign_in(form: SignInForm, username, password) -> str:
+        def sign_in(form: SignInForm, username, password):
             form.go_to_signin()
             form.fill_login(username)
             form.fill_password(password)
             form.submit()
-            return form.get_user_email()
+
+        def go_to_signup(form: SignInForm):
+            form.click_signup_href()
 
     @property
     def form(self):
