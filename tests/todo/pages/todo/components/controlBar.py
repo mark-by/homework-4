@@ -1,6 +1,8 @@
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
 from testutils import Component
+from .contextMenu import ContextMenu
 
 
 class ControlBar(Component):
@@ -18,3 +20,11 @@ class ControlBar(Component):
         self._wait_visible(By.XPATH, self.Selectors.task_list(title))
         # self._wait_clickable(By.XPATH, self.Selectors.task_list(title))
         self.driver.find_element_by_xpath(self.Selectors.task_list(title)).click()
+
+    def delete_task_list(self, title):
+        self._wait_visible(By.XPATH, self.Selectors.task_list(title))
+        ActionChains(self.driver)\
+            .context_click(self.driver.find_element_by_xpath(self.Selectors.task_list(title))).perform()
+        menu = ContextMenu(self.driver)
+        menu.wait_self()
+        menu.delete_task_list()

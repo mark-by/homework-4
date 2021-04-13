@@ -26,6 +26,7 @@ class TaskList(Component):
 
     def get_tasks(self):
         self._wait_visible(By.CSS_SELECTOR, Task.container)
+        self._dis_wait_visible(By.CSS_SELECTOR, '[data-task-id^="_"]')
         tasks = []
         for task in self.driver.find_elements(By.CSS_SELECTOR, Task.container):
             tasks.append(Task(self.driver, task))

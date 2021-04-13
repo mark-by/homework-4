@@ -7,6 +7,7 @@ from selenium.common.exceptions import TimeoutException
 from testutils import Component
 from .taskPriorityMenu import TaskPriorityMenu
 from .contextMenu import ContextMenu
+from .DatePicker import DatePicker
 
 
 class Task(Component):
@@ -14,10 +15,12 @@ class Task(Component):
 
     class Selectors:
         text = '[class^="Task_text"] [class^="EditableText"] p'
-        text_input = '[class^="Task_text"]' # [class^="EditableText"] p'
+        text_input = '[class^="Task_text"]'  # [class^="EditableText"] p'
         checkbox = '[class^="TaskCheckbox"] label'
+        date_picker = 'div[class^="Task_datepicker"] button'
+        date_picker_date = 'div[class^="Task_datepicker"] u'
         priority_button = '[class^="Task_priority"] [class^="PickerButton_base"]'
-        task_id_selector = lambda task_id: f'[data-task-id$="{task_id}"] [class^="Task_base"]'
+        task_id_selector = lambda task_id: f'[data-task-id="{task_id}"] [class^="Task_base"]'
 
     def __init__(self, driver: Remote, element: WebElement):
         super().__init__(driver)
@@ -25,10 +28,7 @@ class Task(Component):
         self.element_selector = self.get_element_selector()
 
     def get_element_selector(self):
-        task_id = self.element.get_attribute('data-task-id').split(':')
-        if len(task_id) > 1:
-            task_id = task_id[1]
-        return self.Selectors.task_id_selector(task_id)
+        return self.Selectors.task_id_selector(self.element.get_attribute('data-task-id'))
 
     def is_checked(self) -> bool:
         selector = self.element_selector + ' ' + self.Selectors.text_input + ' ' + 's'
@@ -55,11 +55,27 @@ class Task(Component):
 
     def toggle(self):
         selector = self.element_selector + ' ' + self.Selectors.checkbox
-        print(selector)
         self._wait_clickable(By.CSS_SELECTOR, selector)
         self.element.find_element_by_css_selector(self.Selectors.checkbox).click()
 
-    # def open_date_picker(self):
+    def open_date_picker(self):
+        print(self.element_selector)
+        self._wait_visible(By.CSS_SELECTOR, self.element_selector)
+        self.hover()
+        selector = self.element_selector + ' ' + self.Selectors.date_picker
+        self._wait_visible(By.CSS_SELECTOR, selector)
+        self._wait_clickable(By.CSS_SELECTOR, selector)
+        self._find(selector).click()
+        return DatePicker(self.driver)
+
+    def set_date(self, days_from_today=0):
+        date_picker = self.open_date_picker()
+        date_picker.choose_day(days_from_today)
+
+    def get_date(self):
+        element_date_selector = self.element_selector + ' ' + self.Selectors.date_picker_date
+        self._wait_visible(By.CSS_SELECTOR, element_date_selector)
+        return self._find(element_date_selector).text
 
     def get_priority(self) -> str:
         priority_level_selector = '[class*=Priority_level]'

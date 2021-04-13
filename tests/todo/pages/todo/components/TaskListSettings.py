@@ -14,8 +14,14 @@ class TaskListSettings(Component):
         edit = 'button:nth-child(7)'
         delete = 'button:nth-child(8)'
 
+    def hide_completed(self):
+        self.__press_button(self.Selectors.hide_completed)
+
     def delete(self):
-        button_selector = self.container + ' ' + self.Selectors.delete
+        self.__press_button(self.Selectors.delete)
+
+    def __press_button(self, selector):
+        button_selector = self.container + ' ' + selector
         self._wait_clickable(By.CSS_SELECTOR, button_selector)
         element = self.driver.find_element_by_css_selector(button_selector)
         element.click()
