@@ -30,11 +30,10 @@ class Settings(Page):
         new_pass: str,
         repeat_pass: str
     ) -> list:
-        self.Actions.open_pass_form()
         menu_form.click_pass()
         pass_form.fill_form(old_pass, new_pass, repeat_pass)
         pass_form.submit()
-        return avatar_form.errors
+        return pass_form.errors
 
     def update_avatar(
         self,

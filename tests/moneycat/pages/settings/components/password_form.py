@@ -10,8 +10,7 @@ class PasswordForm(Component):
         new_password = 'input[name="newPassword"]'
         repeat_password = 'input[name="repeatPassword"]'
         submit = 'input[type="submit"]'
-        error = 'p[class="field_error"]'
-        field_input = ''
+        error = 'p[class="field__error"]'
 
     def fill_form(self, old_pass, new_pass, repeat_pass):
         self._wait_clickable(By.CSS_SELECTOR, self.Selectors.password)
@@ -28,11 +27,10 @@ class PasswordForm(Component):
         self.driver.find_element_by_css_selector(self.Selectors.submit).click()
 
     @property
-    def error(self):
-        self._wait_visible(By.CSS_SELECTOR, self.Selectors.error)
+    def errors(self):
+        self._wait_clickable(By.CSS_SELECTOR, self.Selectors.error)
         return self.driver.find_element_by_css_selector(self.Selectors.error)
-    
+
     @property
     def password(self):
-        self._wait_visible(By.CSS_SELECTOR, self.Selectors.error)
         return self.driver.find_element_by_css_selector(self.Selectors.password)
