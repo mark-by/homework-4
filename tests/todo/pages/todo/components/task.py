@@ -21,14 +21,20 @@ class Task(Component):
         date_picker_date = 'div[class^="Task_datepicker"] u'
         priority_button = '[class^="Task_priority"] [class^="PickerButton_base"]'
         task_id_selector = lambda task_id: f'[data-task-id="{task_id}"] [class^="Task_base"]'
+        task_by_name = lambda name: f'//div[starts-with(@class, "Task_base")]' \
+                                    f'//div[starts-with(@class, "Task_text")]' \
+                                    f'//p[text()="{name}"]/../../../../..'
 
     def __init__(self, driver: Remote, element: WebElement):
         super().__init__(driver)
-        self.element = element
-        self.element_selector = self.get_element_selector()
+        self.element_selector = self.get_element_selector(element.get_attribute('data-task-id'))
 
-    def get_element_selector(self):
-        return self.Selectors.task_id_selector(self.element.get_attribute('data-task-id'))
+    @property
+    def element(self):
+        return self.driver.find_element_by_css_selector(self.element_selector)
+
+    def get_element_selector(self, task_id):
+        return self.Selectors.task_id_selector(task_id)
 
     def is_checked(self) -> bool:
         selector = self.element_selector + ' ' + self.Selectors.text_input + ' ' + 's'
@@ -104,6 +110,12 @@ class Task(Component):
 
         self.hover()
         self.open_priority_menu().choose_priority(selector)
+        self.click()
+
+    def click(self):
+        self._wait_visible(By.CSS_SELECTOR, self.element_selector)
+        self._wait_clickable(By.CSS_SELECTOR, self.element_selector)
+        self._find(self.element_selector).click()
 
     def hover(self):
         ActionChains(self.driver).move_to_element(
