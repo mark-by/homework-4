@@ -4,12 +4,13 @@ import unittest
 import selenium.webdriver as webdriver
 
 from .utils import TestCase
-from .pages.auth import Authorization
+from .pages.auth import AuthPage
 
 class MoneyCatAuthTest(TestCase):
   def test_login(self):
-    account = Authorization()
+    account = AuthPage()
     account.open()
+
     login_form = account.form
     
     self.assertEqual(
