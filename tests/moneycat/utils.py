@@ -25,12 +25,4 @@ class TestCase(unittest.TestCase):
         account.Actions.sign_in(login_form, os.environ.get("LOGIN"), os.environ.get("PASS"))
 
     def tearDown(self) -> None:
-        settings = self.page.task_list.settings
-        settings.wait_self()
-        settings.delete()
-        settings.wait_until_disappear_self()
-        self.page.task_list.wait_until_disappear_title(self.task_list_title)
-        self.driver.refresh()
-        self.control_bar.wait_self()
-
         self.driver.quit()

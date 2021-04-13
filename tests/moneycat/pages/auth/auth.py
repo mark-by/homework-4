@@ -11,7 +11,6 @@ class AuthPage(testutils.Page):
         def sign_in(form: SignInFrom, username, password) -> str:
             form.go_to_signin()
             form.fill_login(username)
-            # form.next()
             form.fill_password(password)
             form.submit()
             return form.get_user_email()
