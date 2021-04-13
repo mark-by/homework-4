@@ -5,7 +5,7 @@ from .utils import TodoTest
 
 class TaskListTest(TodoTest):
 
-    def _test_change_description(self):
+    def test_change_description(self):
         description_content = 'Some description'
         task_list = self.page.task_list
         task_list.fill_description(description_content)
@@ -15,7 +15,7 @@ class TaskListTest(TodoTest):
         task_list.wait_description(description_content)
         self.assertEqual(description_content, task_list.get_description())
 
-    def _test_change_title(self):
+    def test_change_title(self):
         title_content = 'Some title'
         task_list = self.page.task_list
         task_list.fill_title(title_content)
@@ -26,13 +26,13 @@ class TaskListTest(TodoTest):
         task_list.wait_title(title_content)
         self.assertEqual(title_content, task_list.get_title())
 
-    def _test_hide_completed(self):
+    def test_hide_completed(self):
         task_list = self.page.task_list
         task_list.create_task("Not hidden")
         task_list.create_task("Will hidden")
 
-        tasks = task_list.get_tasks()
-        tasks[0].toggle()
+        task = task_list.get_task("Will hidden")
+        task.toggle()
 
         settings = task_list.settings
         settings.wait_self()
@@ -42,7 +42,7 @@ class TaskListTest(TodoTest):
         self.assertEqual(len(tasks), 1)
         self.assertEqual(tasks[0].get_text(), "Not hidden")
 
-    def _bag_here_test_tasks_for_today(self):
+    def __bug_here_test_tasks_for_today(self):
         """По этому тесту найден баг в продукте, связанный с тем, что из списка 'на сегодня' не удаляются задачи при
         удалении их дочерних листов, после чего их нельзя ни удалить ни изменить"""
         task_list = self.page.task_list

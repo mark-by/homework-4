@@ -10,7 +10,7 @@ class ControlBar(Component):
 
     class Selectors:
         create_list_input = '[class^="CreateInput_base"] input'
-        task_list = lambda name: f'//li[starts-with(@class, "SidebarCustoms_item")]//p[text()="{name}"]'
+        task_list = lambda name: f'//li[starts-with(@class, "SidebarCustoms_item")]//p[text()="{name}"]/..'
 
     def create_list(self, title):
         self._wait_clickable(By.CSS_SELECTOR, self.container + ' ' + self.Selectors.create_list_input)
@@ -18,7 +18,6 @@ class ControlBar(Component):
 
     def open_task_list(self, title):
         self._wait_visible(By.XPATH, self.Selectors.task_list(title))
-        # self._wait_clickable(By.XPATH, self.Selectors.task_list(title))
         self.driver.find_element_by_xpath(self.Selectors.task_list(title)).click()
 
     def delete_task_list(self, title):

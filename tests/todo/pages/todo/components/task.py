@@ -61,11 +61,11 @@ class Task(Component):
 
     def toggle(self):
         selector = self.element_selector + ' ' + self.Selectors.checkbox
+        self._wait_visible(By.CSS_SELECTOR, selector)
         self._wait_clickable(By.CSS_SELECTOR, selector)
-        self.element.find_element_by_css_selector(self.Selectors.checkbox).click()
+        self._find(selector).click()
 
     def open_date_picker(self):
-        print(self.element_selector)
         self._wait_visible(By.CSS_SELECTOR, self.element_selector)
         self.hover()
         selector = self.element_selector + ' ' + self.Selectors.date_picker
