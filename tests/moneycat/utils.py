@@ -19,18 +19,12 @@ def get_driver():
 class TestCase(unittest.TestCase):
     def setUp(self):
         self.driver = get_driver()
-        account = pages.AccountPage(self.driver)
+        account = Authorization(self.driver)
         account.open()
         login_form = account.form
         account.Actions.sign_in(login_form, os.environ.get("LOGIN"), os.environ.get("PASS"))
 
-        self.clear = None
-
     def tearDown(self) -> None:
-        if self.clear is not None:
-            self.clear()
-            self.clear = None
-
         settings = self.page.task_list.settings
         settings.wait_self()
         settings.delete()
