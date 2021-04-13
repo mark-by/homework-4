@@ -1,12 +1,10 @@
 import testutils
-from ..auth.components import SignInFrom
 from .components import SellForm
 from .components import CurrencyList
 
 
 class FinancePage(testutils.Page):
     base_url = "https://softree.group"
-    path = "signin"
 
     class Actions:
         @staticmethod
@@ -22,7 +20,7 @@ class FinancePage(testutils.Page):
             sell_form.sell()
 
         @staticmethod
-        def get_wallet_status(sell_form: SellForm) -> str:
+        def get_wallet_status(sell_form: SellForm) -> float:
             return sell_form.wallet_status()
 
         @staticmethod

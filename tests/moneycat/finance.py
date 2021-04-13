@@ -1,19 +1,11 @@
-import os
-
-from .utils import TestCase
+from .auth import MoneyCatAuthTest
 from .pages.finance import FinancePage
-from .pages.auth import AuthPage
 
 
-class MoneyCatAuthTest(TestCase):
+class MoneyCatFinanceTest(MoneyCatAuthTest):
     def test_sell_success(self):
-        account = AuthPage(self.driver)
-        account.open()
-
         finance = FinancePage(self.driver)
         sell_form = finance.sell_form
-
-        account.Actions.sign_in(account.form, os.environ.get("LOGIN"), os.environ.get("PASS"))
 
         finance.Actions.open_card(finance.currency_list)
         before = finance.Actions.get_wallet_status(sell_form)
