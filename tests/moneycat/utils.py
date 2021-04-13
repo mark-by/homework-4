@@ -27,16 +27,4 @@ class TestCase(unittest.TestCase):
         self.clear = None
 
     def tearDown(self) -> None:
-        if self.clear is not None:
-            self.clear()
-            self.clear = None
-
-        settings = self.page.task_list.settings
-        settings.wait_self()
-        settings.delete()
-        settings.wait_until_disappear_self()
-        self.page.task_list.wait_until_disappear_title(self.task_list_title)
-        self.driver.refresh()
-        self.control_bar.wait_self()
-
         self.driver.quit()
