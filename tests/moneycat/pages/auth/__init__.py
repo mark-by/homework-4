@@ -1,1 +1,1 @@
-from .auth import Authorization
+from .auth import AuthPage

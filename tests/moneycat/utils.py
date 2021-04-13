@@ -4,7 +4,7 @@ import uuid
 
 import selenium.webdriver as webdriver
 
-from .pages.auth import Authorization
+from .pages.auth import AuthPage
 
 
 def get_driver():
@@ -19,7 +19,7 @@ def get_driver():
 class TestCase(unittest.TestCase):
     def setUp(self):
         self.driver = get_driver()
-        account = Authorization(self.driver)
+        account = AuthPage(self.driver)
         account.open()
         login_form = account.form
         account.Actions.sign_in(login_form, os.environ.get("LOGIN"), os.environ.get("PASS"))
