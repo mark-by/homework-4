@@ -1,19 +1,9 @@
 import os
 
-<<<<<<< HEAD
-from .utils import TestCase
-from .pages.auth import AuthPage
-
-class MoneyCatAuthTest(TestCase):
-  def test_login(self):
-    account = AuthPage(self.driver)
-    account.open()
-=======
 import unittest
 from .utils import get_driver
 from .pages.auth import AuthPage
 
->>>>>>> timofei_new
 
 class MoneyCatAuthTest(unittest.TestCase):
     def setUp(self):
