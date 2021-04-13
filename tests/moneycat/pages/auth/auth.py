@@ -1,9 +1,6 @@
 from testutils import Page
 from .components import SignInForm
 
-class Authorization(testutils.Page):
-  base_url = "https://softree.group"
-  path = "signup"
 
 class AuthPage(Page):
     base_url = "https://softree.group"
