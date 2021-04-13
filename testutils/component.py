@@ -27,7 +27,7 @@ class Component(object):
     def _clear(self, by, selector):
         text = self._find(selector, by).text
         while text != '':
-            self._find(selector, by).send_keys(Keys.BACKSPACE * len(text))
+            self._find(selector, by).send_keys(Keys.END + Keys.BACKSPACE * len(text))
             text = self._find(selector, by).text
 
     def _clear_input(self, by, selector, send_enter=False, click=True):

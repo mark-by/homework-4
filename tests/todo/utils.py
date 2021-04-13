@@ -27,7 +27,7 @@ class TodoTest(unittest.TestCase):
         self.page = TodoPage(self.driver)
         self.page.open()
         self.control_bar = self.page.control_bar
-        self.task_list_title = uuid.uuid4().hex
+        self.task_list_title = uuid.uuid4().hex[:5]
         self.control_bar.create_list(self.task_list_title)
         self.control_bar.open_task_list(self.task_list_title)
         self.page.task_list.wait_title(self.task_list_title)

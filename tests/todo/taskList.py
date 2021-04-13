@@ -52,7 +52,7 @@ class TaskListTest(TodoTest):
         for task in tasks:
             task.set_date()
 
-        new_task_list = uuid.uuid4().hex
+        new_task_list = uuid.uuid4().hex[:5]
         self.additional_task_lists.append(new_task_list)
         self.control_bar.create_list(new_task_list)
         self.control_bar.open_task_list(new_task_list)

@@ -29,7 +29,7 @@ class TaskList(Component):
 
     def create_task(self, title):
         self._fill_input(By.CSS_SELECTOR, self.Selectors.create_task, title, True)
-        self._wait_visible(By.XPATH, Task.Selectors.task_by_name(title))
+        # self._wait_visible(By.XPATH, Task.Selectors.task_by_name(title))
 
     def wait_until_first_task_be(self, first_task_name, timeout=10, delay=0.1):
         start = time.time()
@@ -42,6 +42,7 @@ class TaskList(Component):
     def get_tasks(self):
         self._wait_visible(By.CSS_SELECTOR, Task.container)
         self._dis_wait_visible(By.CSS_SELECTOR, '[data-task-id^="_"]')
+        self._wait_visible(By.CSS_SELECTOR, Task.container)
         tasks = []
         for task in self.driver.find_elements(By.CSS_SELECTOR, Task.container):
             tasks.append(Task(self.driver, task))
