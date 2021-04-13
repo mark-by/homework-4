@@ -8,7 +8,6 @@ class SignInForm(Component):
     class Selectors:
         login = 'input[type="email"]'
         password = 'input[type="password"]'
-        next_button = '[data-test-id="next-button"]'
         submit_button = 'input[type="submit"]'
         account_header = 'p[id="account"]'
         href_to_signin = 'a[class="signin-link"]'
@@ -30,10 +29,6 @@ class SignInForm(Component):
 
     def fill_login(self, username):
         self._fill_input(By.CSS_SELECTOR, self.Selectors.login, username)
-
-    def next(self):
-        self._wait_visible(By.CSS_SELECTOR, self.Selectors.next_button)
-        self.driver.find_element_by_css_selector(self.Selectors.next_button).click()
 
     def fill_password(self, password):
         self._fill_input(By.CSS_SELECTOR, self.Selectors.password, password)
