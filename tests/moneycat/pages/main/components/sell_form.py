@@ -11,8 +11,8 @@ class SellForm(testutils.Component):
         message = '[class=message]'
 
     def wallet_status(self) -> float:
-        self._wait_clickable(By.CSS_SELECTOR, self.Selectors.has_sell)
-        return float(self.driver.find_element_by_css_selector(self.Selectors.has_sell).text)
+        self._wait_visible(By.CSS_SELECTOR, self.Selectors.has_sell)
+        return float(self.driver.find_element_by_css_selector(self.Selectors.has_sell).text.split(' ')[0])
 
     def fill_input(self, amount):
         self._fill_input(By.CSS_SELECTOR, self.Selectors.input, amount)
