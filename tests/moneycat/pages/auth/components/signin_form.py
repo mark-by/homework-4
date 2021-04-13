@@ -1,8 +1,8 @@
-import testutils
+from testutils import Component
 from selenium.webdriver.common.by import By
 
 
-class SignInFrom(testutils.Component):
+class SignInForm(Component):
     container = '[data-test-id=modal]'
 
     class Selectors:
@@ -13,7 +13,7 @@ class SignInFrom(testutils.Component):
         user_email_header = 'p[id="account"]'
         redirect_to_signin = 'a[class="signin-link"]'
 
-    def go_to_signin(self) -> str:
+    def go_to_signin(self):
         self._wait_clickable(By.CSS_SELECTOR, self.Selectors.redirect_to_signin)
         return self.driver.find_element_by_css_selector(self.Selectors.redirect_to_signin).click()
 

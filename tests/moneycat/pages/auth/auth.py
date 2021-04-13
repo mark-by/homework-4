@@ -1,14 +1,14 @@
-import testutils
-from .components import SignInFrom
+from testutils import Page
+from .components import SignInForm
 
 
-class AuthPage(testutils.Page):
+class AuthPage(Page):
     base_url = "https://softree.group"
     path = "signin"
 
     class Actions:
         @staticmethod
-        def sign_in(form: SignInFrom, username, password) -> str:
+        def sign_in(form: SignInForm, username, password) -> str:
             form.go_to_signin()
             form.fill_login(username)
             form.fill_password(password)
@@ -17,4 +17,4 @@ class AuthPage(testutils.Page):
 
     @property
     def form(self):
-        return SignInFrom(self.driver)
+        return SignInForm(self.driver)
