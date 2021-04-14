@@ -19,7 +19,7 @@ class MoneyCatSettingsTest(TestCase):
         self.settings.update_pass(
             menu_form=self.settings.menu_form,
             pass_form=self.settings.password_form,
-            old_pass="lolkek",
+            old_pass=os.environ.get("PASS"),
             new_pass="12345",
             repeat_pass="12345",
         )
@@ -29,7 +29,7 @@ class MoneyCatSettingsTest(TestCase):
         self.settings.update_pass(
             menu_form=self.settings.menu_form,
             pass_form=self.settings.password_form,
-            old_pass="lolkek",
+            old_pass=os.environ.get("PASS"),
             new_pass="keklol",
             repeat_pass="keklol",
         )
@@ -41,8 +41,8 @@ class MoneyCatSettingsTest(TestCase):
             menu_form=self.settings.menu_form,
             pass_form=self.settings.password_form,
             old_pass="keklol",
-            new_pass="lolkek",
-            repeat_pass="lolkek",
+            new_pass=os.environ.get("PASS"),
+            repeat_pass=os.environ.get("PASS"),
         )
 
         self.assertEqual(
@@ -54,7 +54,7 @@ class MoneyCatSettingsTest(TestCase):
         self.settings.update_pass(
             menu_form=self.settings.menu_form,
             pass_form=self.settings.password_form,
-            old_pass="lolkek",
+            old_pass=os.environ.get("PASS"),
             new_pass="BSiaIwOqsSGNKCu9JGcZWFUEGGq5CID",
             repeat_pass="BSiaIwOqsSGNKCu9JGcZWFUEGGq5CID",
         )
@@ -64,7 +64,7 @@ class MoneyCatSettingsTest(TestCase):
         self.settings.update_pass(
             menu_form=self.settings.menu_form,
             pass_form=self.settings.password_form,
-            old_pass="lolkek",
+            old_pass=os.environ.get("PASS"),
             new_pass="невалидный",
             repeat_pass="невалидный",
         )
@@ -74,7 +74,7 @@ class MoneyCatSettingsTest(TestCase):
         self.settings.update_pass(
             menu_form=self.settings.menu_form,
             pass_form=self.settings.password_form,
-            old_pass="lolkek",
+            old_pass=os.environ.get("PASS"),
             new_pass="kekkek",
             repeat_pass="kekkkk",
         )
