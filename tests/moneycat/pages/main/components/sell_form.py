@@ -9,6 +9,10 @@ class SellForm(testutils.Component):
         buy_button = '.opened-rate__btn.buy'
         input = '[id=rate-amount-input]'
         message = '[class=message]'
+        error_message = '.message'
+
+    def get_error_message(self) -> str:
+        return self.driver.find_element_by_css_selector(self.Selectors.error_message).text
 
     def wallet_status(self) -> float:
         self._wait_visible(By.CSS_SELECTOR, self.Selectors.has_sell)
