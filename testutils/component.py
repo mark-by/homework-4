@@ -40,28 +40,28 @@ class Component(object):
             self._find(selector, by).send_keys(Keys.RETURN)
 
     def wait_self(self, by=By.CSS_SELECTOR):
-        self._wait_visible(by, self.container)
+        return self._wait_visible(by, self.container)
 
     def wait_until_disappear_self(self, by=By.CSS_SELECTOR):
-        self._dis_wait_visible(by, self.container)
+        return self._dis_wait_visible(by, self.container)
 
     def _wait_text(self, by, selector, text):
-        self._wait(expected_conditions.text_to_be_present_in_element, by, selector, text)
+        return self._wait(expected_conditions.text_to_be_present_in_element, by, selector, text)
 
     def _dis_wait_text(self, by, selector, text):
-        self._wait_not(expected_conditions.text_to_be_present_in_element, by, selector, text)
+        return self._wait_not(expected_conditions.text_to_be_present_in_element, by, selector, text)
 
     def _wait_visible(self, by, selector):
-        self._wait(expected_conditions.visibility_of_element_located, by, selector)
+        return self._wait(expected_conditions.visibility_of_element_located, by, selector)
 
     def _dis_wait_visible(self, by, selector):
-        self._wait_not(expected_conditions.visibility_of_element_located, by, selector)
+        return self._wait_not(expected_conditions.visibility_of_element_located, by, selector)
 
     def _wait_clickable(self, by, selector):
-        self._wait(expected_conditions.element_to_be_clickable, by, selector)
+        return self._wait(expected_conditions.element_to_be_clickable, by, selector)
 
     def _wait(self, condition: expected_conditions, by, selector, *args):
-        WebDriverWait(self.driver, 30, 0.1).until(
+        return WebDriverWait(self.driver, 30, 0.1).until(
             condition((by, selector), *args)
         )
 

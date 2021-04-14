@@ -28,8 +28,7 @@ class ControlBar(Component):
                 continue
 
     def __open_task_list(self, title):
-        self._wait_visible(By.XPATH, self.Selectors.task_list(title))
-        self.driver.find_element_by_xpath(self.Selectors.task_list(title)).click()
+        self._wait_visible(By.XPATH, self.Selectors.task_list(title)).click()
 
     def delete_task_list(self, title):
         self._wait_visible(By.XPATH, self.Selectors.task_list(title))
