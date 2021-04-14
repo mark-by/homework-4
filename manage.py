@@ -1,7 +1,9 @@
 import sys
+import os
 from multiprocessing import Process
 from typing import List
 import subprocess
+from testutils import GlobalCurrentBrowser
 
 import unittest
 
@@ -13,8 +15,7 @@ def run_tests(tests: List):
     for test in tests:
         suites.append(unittest.makeSuite(test))
     suite = unittest.TestSuite(suites)
-    result = unittest.TextTestRunner().run(suite)
-    sys.exit(not result.wasSuccessful())
+    return unittest.TextTestRunner().run(suite)
 
 
 def init_grid():
@@ -37,10 +38,17 @@ def run_selenium():
 if __name__ == '__main__':
     if len(sys.argv) > 1:
         if sys.argv[1] == 'test':
-            run_tests(settings.TESTS)
+            results = []
+            for browser in settings.BROWSERS:
+
+                GlobalCurrentBrowser.set(browser)
+                result = run_tests(settings.TESTS)
+                results.append(result.wasSuccessful())
+            if len(results) == 0:
+                print("You should specify browsers in settings")
+                sys.exit(1)
+
+            sys.exit(False in results)
         elif sys.argv[1] == 'run_selenium':
             run_selenium()
     print("Usage: python manage.py [test, run_selenium]")
-
-
-
