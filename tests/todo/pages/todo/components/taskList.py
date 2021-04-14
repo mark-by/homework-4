@@ -23,9 +23,8 @@ class TaskList(Component):
         return TaskListSettings(self.driver)
 
     def get_task(self, title) -> Task:
-        self._wait_visible(By.XPATH, Task.Selectors.task_by_name(title))
         return Task(self.driver,
-                    self._find(Task.Selectors.task_by_name(title), By.XPATH))
+                    self._wait_visible(By.XPATH, Task.Selectors.task_by_name(title)))
 
     def create_task(self, title):
         self._fill_input(By.CSS_SELECTOR, self.Selectors.create_task, title, True)
