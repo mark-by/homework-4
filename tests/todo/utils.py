@@ -1,25 +1,14 @@
 import os
-import unittest
 import uuid
 
-from selenium.webdriver import Remote, DesiredCapabilities
-
+from testutils import SeleniumTest
 from tests.todo.pages import AccountPage, TodoPage
 
 
-def get_driver():
-    browser = os.environ.get('BROWSER', 'CHROME')
-
-    return Remote(
-        command_executor='http://127.0.0.1:4444/wd/hub',
-        desired_capabilities=getattr(DesiredCapabilities, browser).copy()
-    )
-
-
-class TodoTest(unittest.TestCase):
+class TodoTest(SeleniumTest):
     def setUp(self):
+        super().setUp()
         self.additional_task_lists = []
-        self.driver = get_driver()
         account = AccountPage(self.driver)
         account.open()
         login_form = account.form

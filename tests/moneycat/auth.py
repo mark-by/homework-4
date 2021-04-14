@@ -1,13 +1,13 @@
 import os
 
 import unittest
-from .utils import get_driver
 from .pages.auth import AuthPage
+from testutils import SeleniumTest
 
 
-class MoneyCatAuthTest(unittest.TestCase):
+class MoneyCatAuthTest(SeleniumTest):
     def setUp(self):
-        self.driver = get_driver()
+        super(MoneyCatAuthTest, self).setUp()
         self.account = AuthPage(self.driver)
         self.account.open()
         self.login_form = self.account.form

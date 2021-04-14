@@ -12,3 +12,8 @@ TESTS = [
     TaskTest,
     SortTest
 ]
+
+BROWSERS = [
+    'CHROME',
+    'FIREFOX',
+]
