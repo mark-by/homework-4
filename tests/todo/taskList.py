@@ -18,7 +18,7 @@ class TaskListTest(TodoTest):
     def test_change_title(self):
         title_content = 'Some title'
         task_list = self.page.task_list
-        task_list.fill_title(title_content)
+        task_list.rename_title(title_content)
         self.task_list_title = title_content
         self.driver.refresh()
         self.control_bar.wait_self()

@@ -70,8 +70,11 @@ class TaskList(Component):
         self._wait_visible(By.CSS_SELECTOR, self.Selectors.description)
         return self.driver.find_element_by_css_selector(self.Selectors.description).text
 
+    def rename_title(self, content):
+        self._clear_input(By.CSS_SELECTOR, self.Selectors.title)
+        self._fill_input(By.CSS_SELECTOR, self.Selectors.title, content, True)
+
     def fill_title(self, content):
-        self._clear_input(By.CSS_SELECTOR, self.Selectors.title, True)
         self._fill_input(By.CSS_SELECTOR, self.Selectors.title, content, True)
 
     def clear_title(self):
