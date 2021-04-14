@@ -1,5 +1,6 @@
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
 
 from testutils import Component
 from .contextMenu import ContextMenu
@@ -17,6 +18,16 @@ class ControlBar(Component):
         self._fill_input(By.CSS_SELECTOR, self.container + ' ' + self.Selectors.create_list_input, title, True)
 
     def open_task_list(self, title):
+        for i in range(3):
+            try:
+                self.__open_task_list(title)
+                return
+            except NoSuchElementException as e:
+                if i == 2:
+                    raise e
+                continue
+
+    def __open_task_list(self, title):
         self._wait_visible(By.XPATH, self.Selectors.task_list(title))
         self.driver.find_element_by_xpath(self.Selectors.task_list(title)).click()
 
