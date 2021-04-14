@@ -2,13 +2,13 @@ import os
 
 import time
 import unittest
-from .utils import get_driver
 from .pages.signup import SignUpPage
+from testutils import SeleniumTest
 
 
-class MoneyCatRegistrationTest(unittest.TestCase):
+class MoneyCatRegistrationTest(SeleniumTest):
     def setUp(self):
-        self.driver = get_driver()
+        super().setUp()
         self.account = SignUpPage(self.driver)
         self.account.open()
         self.signup_form = self.account.form
