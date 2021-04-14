@@ -36,19 +36,20 @@ def run_selenium():
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        if sys.argv[1] == 'test':
-            results = []
-            for browser in settings.BROWSERS:
+    if len(sys.argv) <= 1:
+        print("Usage: python manage.py [test, run_selenium]")
 
-                GlobalCurrentBrowser.set(browser)
-                result = run_tests(settings.TESTS)
-                results.append(result.wasSuccessful())
-            if len(results) == 0:
-                print("You should specify browsers in settings")
-                sys.exit(1)
+    if sys.argv[1] == 'test':
+        results = []
+        for browser in settings.BROWSERS:
 
-            sys.exit(False in results)
-        elif sys.argv[1] == 'run_selenium':
-            run_selenium()
-    print("Usage: python manage.py [test, run_selenium]")
+            GlobalCurrentBrowser.set(browser)
+            result = run_tests(settings.TESTS)
+            results.append(result.wasSuccessful())
+        if len(results) == 0:
+            print("You should specify browsers in settings")
+            sys.exit(1)
+
+        sys.exit(False in results)
+    elif sys.argv[1] == 'run_selenium':
+        run_selenium()
