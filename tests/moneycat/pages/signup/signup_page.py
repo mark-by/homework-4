@@ -14,7 +14,7 @@ class SignUpPage(Page):
             form.fill_password2(password2)
             form.submit()
 
-        def go_to_signin(form: SignUpForm):
+        def go_to_sign_in(form: SignUpForm):
             form.click_signin_href()
 
     @property

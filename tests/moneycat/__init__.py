@@ -1,2 +1,3 @@
-from .auth_tests import MoneyCatAuthTest
-from .registration_tests import MoneyCatRegistrationTest
+from .auth import MoneyCatAuthTest
+from .registration import MoneyCatRegistrationTest
+from .converter import MoneyCatConverterTest
