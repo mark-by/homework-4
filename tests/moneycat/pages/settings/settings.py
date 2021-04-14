@@ -29,11 +29,10 @@ class Settings(Page):
         old_pass: str,
         new_pass: str,
         repeat_pass: str
-    ) -> list:
+    ) -> None:
         menu_form.click_pass()
         pass_form.fill_form(old_pass, new_pass, repeat_pass)
         pass_form.submit()
-        return pass_form.errors
 
     def update_avatar(
         self,

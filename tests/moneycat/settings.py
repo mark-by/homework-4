@@ -4,6 +4,10 @@ from .utils import TestCase
 from .pages.settings import Settings
 
 
+VALID_AVATAR = "./assets/normal.png"
+BIG_AVATAR = "./assets/big.jpeg"
+
+
 class MoneyCatSettingsTest(TestCase):
     def setUp(self):
         super().setUp()
@@ -12,24 +16,27 @@ class MoneyCatSettingsTest(TestCase):
         self.settings.open()
 
     def test_new_pass_len_less_than_6(self):
-        errors = self.settings.update_pass(
+        self.settings.update_pass(
             menu_form=self.settings.menu_form,
             pass_form=self.settings.password_form,
             old_pass="lolkek",
             new_pass="12345",
             repeat_pass="12345",
         )
-        self.assertTrue(errors)
+        self.assertTrue(self.settings.password_form.errors)
 
     def test_valid_pass(self):
-        errors = self.settings.update_pass(
+        self.settings.update_pass(
             menu_form=self.settings.menu_form,
             pass_form=self.settings.password_form,
             old_pass="lolkek",
             new_pass="keklol",
             repeat_pass="keklol",
         )
-        self.assertFalse(errors)
+        success_msg = self.settings.password_form.success_msg.text
+        self.settings.password_form.clear_input()
+        self.driver.refresh()
+
         self.settings.update_pass(
             menu_form=self.settings.menu_form,
             pass_form=self.settings.password_form,
@@ -38,48 +45,59 @@ class MoneyCatSettingsTest(TestCase):
             repeat_pass="lolkek",
         )
 
+        self.assertEqual(
+            self.settings.password_form.success_msg.text,
+            "Пароль успешно обновлен!",
+        )
+
     def test_new_pass_len_more_than_30(self):
-        errors = self.settings.update_pass(
+        self.settings.update_pass(
             menu_form=self.settings.menu_form,
             pass_form=self.settings.password_form,
             old_pass="lolkek",
             new_pass="BSiaIwOqsSGNKCu9JGcZWFUEGGq5CID",
             repeat_pass="BSiaIwOqsSGNKCu9JGcZWFUEGGq5CID",
         )
-        self.assertTrue(errors)
-        self.settings.update_pass(
-            menu_form=self.settings.menu_form,
-            pass_form=self.settings.password_form,
-            old_pass="keklol",
-            new_pass="lolkek",
-            repeat_pass="lolkek",
-        )
+        self.assertTrue(self.settings.password_form.errors)
 
     def test_invalid_symbols(self):
-        errors = self.settings.update_pass(
+        self.settings.update_pass(
             menu_form=self.settings.menu_form,
             pass_form=self.settings.password_form,
             old_pass="lolkek",
             new_pass="невалидный",
             repeat_pass="невалидный",
         )
-        self.assertTrue(errors)
+        self.assertTrue(self.settings.password_form.errors)
 
     def test_pass_not_cmp(self):
-        errors = self.settings.update_pass(
+        self.settings.update_pass(
             menu_form=self.settings.menu_form,
             pass_form=self.settings.password_form,
             old_pass="lolkek",
             new_pass="kekkek",
             repeat_pass="kekkkk",
         )
-        self.assertTrue(errors)
+        self.assertTrue(self.settings.password_form.errors)
 
     # def test_change_avatar(self):
-    #     pass
+    #     self.settings.update_avatar(
+    #         menu_form=self.settings.menu_form,
+    #         avatar_form=self.settings.avatar_form,
+    #         file_path=VALID_AVATAR,
+    #     )
+    #     self.assertEqual(
+    #         self.settings.avatar_form.success_msg.text,
+    #         "Фотография успешно обновлена!",
+    #     )
 
     # def test_avatar_invalid_size(self):
-    #     pass
+    #     self.settings.update_avatar(
+    #         menu_form=self.settings.menu_form,
+    #         avatar_form=self.settings.avatar_form,
+    #         file_path=BIG_AVATAR,
+    #     )
+    #     self.assertTrue(self.settings.avatar_form.errors)
 
     def test_check_user_data(self):
         email = self.settings.open_avatar_form(

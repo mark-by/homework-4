@@ -10,16 +10,17 @@ class PasswordForm(Component):
         new_password = 'input[name="newPassword"]'
         repeat_password = 'input[name="repeatPassword"]'
         submit = 'input[type="submit"]'
-        error = 'p[class="field__error"]'
+        errors = 'p[class="field__error"]'
+        success_msg = 'div[class="message-content"]'
+
+    def clear_input(self):
+        self._clear_input(By.CSS_SELECTOR, self.Selectors.password)
+        self._clear_input(By.CSS_SELECTOR, self.Selectors.new_password)
+        self._clear_input(By.CSS_SELECTOR, self.Selectors.repeat_password)
 
     def fill_form(self, old_pass, new_pass, repeat_pass):
-        self._wait_clickable(By.CSS_SELECTOR, self.Selectors.password)
         self._fill_input(By.CSS_SELECTOR, self.Selectors.password, old_pass, True)
-
-        self._wait_clickable(By.CSS_SELECTOR, self.Selectors.password)
         self._fill_input(By.CSS_SELECTOR, self.Selectors.new_password, new_pass, True)
-
-        self._wait_clickable(By.CSS_SELECTOR, self.Selectors.password)
         self._fill_input(By.CSS_SELECTOR, self.Selectors.repeat_password, repeat_pass, True)
 
     def submit(self):
@@ -28,9 +29,15 @@ class PasswordForm(Component):
 
     @property
     def errors(self):
-        self._wait_clickable(By.CSS_SELECTOR, self.Selectors.error)
-        return self.driver.find_element_by_css_selector(self.Selectors.error)
+        self._wait_visible(By.CSS_SELECTOR, self.Selectors.errors)
+        return self.driver.find_element_by_css_selector(self.Selectors.errors)
+
+    @property
+    def success_msg(self):
+        self._wait_visible(By.CSS_SELECTOR, self.Selectors.success_msg)
+        return self.driver.find_element_by_css_selector(self.Selectors.success_msg)
 
     @property
     def password(self):
+        self._wait_visible(By.CSS_SELECTOR, self.Selectors.password)
         return self.driver.find_element_by_css_selector(self.Selectors.password)
