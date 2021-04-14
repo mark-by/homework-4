@@ -18,6 +18,7 @@ def get_driver():
 
 class TodoTest(unittest.TestCase):
     def setUp(self):
+        self.additional_task_lists = []
         self.driver = get_driver()
         account = AccountPage(self.driver)
         account.open()
@@ -26,18 +27,24 @@ class TodoTest(unittest.TestCase):
         self.page = TodoPage(self.driver)
         self.page.open()
         self.control_bar = self.page.control_bar
-        self.task_list_title = uuid.uuid4().hex
+        self.task_list_title = uuid.uuid4().hex[:5]
         self.control_bar.create_list(self.task_list_title)
         self.control_bar.open_task_list(self.task_list_title)
         self.page.task_list.wait_title(self.task_list_title)
 
         self.clear = None
 
+    def clear_additional_task_lists(self):
+        for task_list in self.additional_task_lists:
+            self.control_bar.delete_task_list(task_list)
+
     def tearDown(self) -> None:
         if self.clear is not None:
             self.clear()
             self.clear = None
 
+        self.control_bar.open_task_list(self.task_list_title)
+        self.page.task_list.wait_title(self.task_list_title)
         settings = self.page.task_list.settings
         settings.wait_self()
         settings.delete()
@@ -46,4 +53,5 @@ class TodoTest(unittest.TestCase):
         self.driver.refresh()
         self.control_bar.wait_self()
 
+        self.additional_task_lists = []
         self.driver.quit()
