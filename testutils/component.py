@@ -69,5 +69,3 @@ class Component(object):
         WebDriverWait(self.driver, 30, 0.1).until_not(
             condition((by, selector), *args)
         )
-
-

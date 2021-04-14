@@ -1,6 +1,5 @@
 import os
 import unittest
-import uuid
 
 import selenium.webdriver as webdriver
 

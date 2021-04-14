@@ -2,18 +2,18 @@ from testutils import Component
 from selenium.webdriver.common.by import By
 
 
-class SignInForm(Component):
+class SignUpForm(Component):
     container = '[data-test-id=modal]'
 
     class Selectors:
         login = 'input[type="email"]'
-        password = 'input[type="password"]'
+        password1 = 'input[name="password1"]'
+        password2 = 'input[name="password2"]'
         submit_button = 'input[type="submit"]'
-        account_header = 'p[id="account"]'
         href_to_signin = 'a[class="signin-link"]'
-        error_message = 'p[class="field__error"]'
-        href_to_signup = 'a[class="signup-link"]'
-        registration_title = 'h2[class="modal__title"]'
+        error_message = '.field__error'
+        registration_title = '[class="modal__title"]'
+        account_header = 'p[id="account"]'
 
     def go_to_signin(self):
         self._wait_clickable(By.CSS_SELECTOR, self.Selectors.href_to_signin)
@@ -23,24 +23,27 @@ class SignInForm(Component):
         self._wait_clickable(By.CSS_SELECTOR, self.Selectors.account_header)
         return self.driver.find_element_by_css_selector(self.Selectors.account_header).text
 
-    def get_error_message(self) -> str:
+    def get_error_message(self, num) -> str:
         self._wait_visible(By.CSS_SELECTOR, self.Selectors.error_message)
-        return self.driver.find_element_by_css_selector(self.Selectors.error_message).text
+        return self.driver.find_elements_by_css_selector(self.Selectors.error_message)[num].text
 
     def fill_login(self, username):
         self._fill_input(By.CSS_SELECTOR, self.Selectors.login, username)
 
-    def fill_password(self, password):
-        self._fill_input(By.CSS_SELECTOR, self.Selectors.password, password)
+    def fill_password1(self, password1):
+        self._fill_input(By.CSS_SELECTOR, self.Selectors.password1, password1)
+
+    def fill_password2(self, password2):
+        self._fill_input(By.CSS_SELECTOR, self.Selectors.password2, password2)
 
     def submit(self):
         self._wait_clickable(By.CSS_SELECTOR, self.Selectors.submit_button)
         self.driver.find_element_by_css_selector(self.Selectors.submit_button).click()
 
-    def click_signup_href(self):
-        self._wait_clickable(By.CSS_SELECTOR, self.Selectors.href_to_signup)
-        self.driver.find_element_by_css_selector(self.Selectors.href_to_signup).click()
-
-    def get_registration_title(self):
+    def get_auth_title(self):
         self._wait_visible(By.CSS_SELECTOR, self.Selectors.registration_title)
         return self.driver.find_element_by_css_selector(self.Selectors.registration_title).text
+
+    def click_signin_href(self):
+        self._wait_clickable(By.CSS_SELECTOR, self.Selectors.href_to_signin)
+        self.driver.find_element_by_css_selector(self.Selectors.href_to_signin).click()
