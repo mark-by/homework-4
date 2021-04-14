@@ -52,7 +52,10 @@ class Component(object):
         self._wait_not(expected_conditions.text_to_be_present_in_element, by, selector, text)
 
     def _wait_visible(self, by, selector):
-        self._wait(expected_conditions.visibility_of_element_located, by, selector)
+        return self._wait(expected_conditions.visibility_of_element_located, by, selector)
+
+    def _wait_presense(self, by, selector):
+        return self._wait(expected_conditions.presence_of_element_located, by, selector)
 
     def _dis_wait_visible(self, by, selector):
         self._wait_not(expected_conditions.visibility_of_element_located, by, selector)
@@ -69,5 +72,3 @@ class Component(object):
         WebDriverWait(self.driver, 30, 0.1).until_not(
             condition((by, selector), *args)
         )
-
-

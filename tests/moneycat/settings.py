@@ -4,8 +4,8 @@ from .utils import TestCase
 from .pages.settings import Settings
 
 
-VALID_AVATAR = "./assets/normal.png"
-BIG_AVATAR = "./assets/big.jpeg"
+VALID_AVATAR = "/assets/normal.png"
+BIG_AVATAR = "/assets/big.jpeg"
 
 
 class MoneyCatSettingsTest(TestCase):
@@ -80,24 +80,27 @@ class MoneyCatSettingsTest(TestCase):
         )
         self.assertTrue(self.settings.password_form.errors)
 
-    # def test_change_avatar(self):
-    #     self.settings.update_avatar(
-    #         menu_form=self.settings.menu_form,
-    #         avatar_form=self.settings.avatar_form,
-    #         file_path=VALID_AVATAR,
-    #     )
-    #     self.assertEqual(
-    #         self.settings.avatar_form.success_msg.text,
-    #         "Фотография успешно обновлена!",
-    #     )
+    def test_change_avatar(self):
+        self.settings.update_avatar(
+            menu_form=self.settings.menu_form,
+            avatar_form=self.settings.avatar_form,
+            file_path=os.getcwd() + VALID_AVATAR,
+        )
+        self.assertEqual(
+            self.settings.avatar_form.success_msg.text,
+            "Фотография успешно обновлена!",
+        )
 
-    # def test_avatar_invalid_size(self):
-    #     self.settings.update_avatar(
-    #         menu_form=self.settings.menu_form,
-    #         avatar_form=self.settings.avatar_form,
-    #         file_path=BIG_AVATAR,
-    #     )
-    #     self.assertTrue(self.settings.avatar_form.errors)
+    def test_avatar_invalid_size(self):
+        self.settings.update_avatar(
+            menu_form=self.settings.menu_form,
+            avatar_form=self.settings.avatar_form,
+            file_path=os.getcwd() + BIG_AVATAR,
+        )
+        self.assertEqual(
+            self.settings.avatar_form.errors.text,
+            "Упс, что-то пошло не так(",
+        )
 
     def test_check_user_data(self):
         email = self.settings.open_avatar_form(

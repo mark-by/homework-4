@@ -8,15 +8,13 @@ class AvatarForm(Component):
 
     class Selectors:
         email = 'p[id="username"]'
-        submit = 'input[type="submit"]'
-        errors = 'div[id="message-content"]'
+        upload_file = 'input[id="upload-file"]'
         success_msg = 'div[class="message-content"]'
+        submit = 'input[type="submit"]'
 
     def upload_file(self, path_to_file: str) -> None:
         self._wait_visible(By.CSS_SELECTOR, self.Selectors.submit)
-        submit = self.driver.find_element_by_css_selector(self.Selectors.submit)
-        submit.click()
-        submit.send_keys(path_to_file + Keys.RETURN)
+        self._find(self.Selectors.upload_file).send_keys(path_to_file)
 
     @property
     def email(self):
@@ -30,5 +28,5 @@ class AvatarForm(Component):
 
     @property
     def errors(self):
-        self._wait_visible(By.CSS_SELECTOR, self.Selectors.errors)
-        return self.driver.find_element_by_css_selector(self.Selectors.errors)
+        self._wait_visible(By.CSS_SELECTOR, self.Selectors.success_msg)
+        return self.driver.find_element_by_css_selector(self.Selectors.success_msg)
