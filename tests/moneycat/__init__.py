@@ -1,2 +1,3 @@
 from .auth import MoneyCatAuthTest
-from .main import MoneyCatFinanceTest
+from .main import MoneyCatMainTest
+from .settings import MoneyCatSettingsTest

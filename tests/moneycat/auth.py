@@ -25,6 +25,7 @@ class MoneyCatAuthTest(unittest.TestCase):
             ),
             "Личный кабинет"
         )
+<<<<<<< HEAD
 
     # def test_login_nonexist(self):
     #     account = AuthPage()
@@ -55,3 +56,5 @@ class MoneyCatAuthTest(unittest.TestCase):
     #         ),
     #         os.environ.get("LOGIN")
     #     )
+=======
+>>>>>>> master

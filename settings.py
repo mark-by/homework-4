@@ -1,6 +1,6 @@
-from tests.todo import TaskTest, TaskListTest
-from tests.moneycat import MoneyCatAuthTest
-from tests.moneycat import MoneyCatFinanceTest
+
+from tests.moneycat import MoneyCatAuthTest, MoneyCatSettingsTest, MoneyCatMainTest
+from tests.todo import TaskTest, TaskListTest, SortTest
 
 CHROME_BIN = './bin/mac_m1/chromedriver'
 FIREFOX_BIN = './bin/mac_m1/geckodriver'
@@ -10,5 +10,10 @@ TESTS = [
     # TaskTest,
     # TaskListTest,
     # MoneyCatAuthTest,
-    MoneyCatFinanceTest
+    MoneyCatMainTest,
+    MoneyCatAuthTest,
+    MoneyCatSettingsTest,
+    TaskListTest,
+    TaskTest,
+    SortTest
 ]

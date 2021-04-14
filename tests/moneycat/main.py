@@ -2,7 +2,7 @@ from .utils import TestCase
 from .pages.main import MainPage
 
 
-class MoneyCatFinanceTest(TestCase):
+class MoneyCatMainTest(TestCase):
     def setUp(self):
         super().setUp()
         self.main = MainPage(self.driver)
