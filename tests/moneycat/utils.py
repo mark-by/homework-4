@@ -23,7 +23,5 @@ class TestCase(unittest.TestCase):
         login_form = account.form
         account.Actions.sign_in(login_form, os.environ.get("LOGIN"), os.environ.get("PASS"))
 
-        self.clear = None
-
     def tearDown(self) -> None:
         self.driver.quit()

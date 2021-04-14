@@ -95,3 +95,12 @@ class MoneyCatAuthTest(unittest.TestCase):
             self.login_form.get_registration_title(),
             "Добро пожаловать!"
         )
+
+        self.assertEqual(
+            self.account.Actions.sign_in(
+                self.login_form,
+                os.environ.get("LOGIN"),
+                os.environ.get("PASS")
+            ),
+            "Личный кабинет"
+        )
