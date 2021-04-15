@@ -18,7 +18,7 @@ class SellForm(testutils.Component):
         self._wait_visible(By.CSS_SELECTOR, self.Selectors.has_sell)
         return float(self.driver.find_element_by_css_selector(self.Selectors.has_sell).text.split(' ')[0])
 
-    def fill_input(self, amount):
+    def fill_input(self, amount: str):
         self._fill_input(By.CSS_SELECTOR, self.Selectors.input, amount)
 
     def wait_for_message(self):

@@ -12,6 +12,7 @@ class HeaderForm(testutils.Component):
         exit_dropdown_menu = '#drop-down-exit-btn'
         bag = '#bag'
         history = '#history'
+        catalog = '#catalog'
         auth_container = '.modal__title'
         settings_container = '.settings.container'
         bag_container = '.bag.container'
@@ -20,6 +21,10 @@ class HeaderForm(testutils.Component):
     def click_logo(self):
         self._wait_visible(By.CSS_SELECTOR, self.Selectors.logo)
         self.driver.find_element_by_css_selector(self.Selectors.logo).click()
+
+    def click_catalog(self):
+        self._wait_visible(By.CSS_SELECTOR, self.Selectors.catalog)
+        self.driver.find_element_by_css_selector(self.Selectors.catalog).click()
 
     def click_account(self) -> bool:
         self._wait_visible(By.CSS_SELECTOR, self.Selectors.account)
