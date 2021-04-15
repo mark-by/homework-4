@@ -18,15 +18,12 @@ class AvatarForm(Component):
 
     @property
     def email(self):
-        self._wait_visible(By.CSS_SELECTOR, self.Selectors.email)
-        return self.driver.find_element_by_css_selector(self.Selectors.email)
+        return self._wait_visible(By.CSS_SELECTOR, self.Selectors.email)
 
     @property
     def success_msg(self):
-        self._wait_visible(By.CSS_SELECTOR, self.Selectors.success_msg)
-        return self.driver.find_element_by_css_selector(self.Selectors.success_msg)
+        return self._wait_visible(By.CSS_SELECTOR, self.Selectors.success_msg)
 
     @property
     def errors(self):
-        self._wait_visible(By.CSS_SELECTOR, self.Selectors.success_msg)
-        return self.driver.find_element_by_css_selector(self.Selectors.success_msg)
+        return self._wait_visible(By.CSS_SELECTOR, self.Selectors.success_msg)

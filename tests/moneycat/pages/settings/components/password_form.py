@@ -24,20 +24,16 @@ class PasswordForm(Component):
         self._fill_input(By.CSS_SELECTOR, self.Selectors.repeat_password, repeat_pass, True)
 
     def submit(self):
-        self._wait_clickable(By.CSS_SELECTOR, self.Selectors.submit)
-        self.driver.find_element_by_css_selector(self.Selectors.submit).click()
+        self._wait_clickable(By.CSS_SELECTOR, self.Selectors.submit).click()
 
     @property
     def errors(self):
-        self._wait_visible(By.CSS_SELECTOR, self.Selectors.errors)
-        return self.driver.find_element_by_css_selector(self.Selectors.errors)
+        return self._wait_visible(By.CSS_SELECTOR, self.Selectors.errors)
 
     @property
     def success_msg(self):
-        self._wait_visible(By.CSS_SELECTOR, self.Selectors.success_msg)
-        return self.driver.find_element_by_css_selector(self.Selectors.success_msg)
+        return self._wait_visible(By.CSS_SELECTOR, self.Selectors.success_msg)
 
     @property
     def password(self):
-        self._wait_visible(By.CSS_SELECTOR, self.Selectors.password)
-        return self.driver.find_element_by_css_selector(self.Selectors.password)
+        return self._wait_visible(By.CSS_SELECTOR, self.Selectors.password)
