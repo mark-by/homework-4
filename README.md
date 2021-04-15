@@ -1,6 +1,11 @@
 # Selenium тесты
 для проекта MoneyCat (softree.group) и Todo (todo.mail.ru)
 
+### Проблемы
+Мерцающие тесты на todo.mail.ru.
+1. **Иногда** задача создается с пустым названием.
+2. Селениум **иногда** зависает и не отвисает на поиске листа задач в меню
+
 ## SetUp
 requirement python version - 3.7.x  
 
