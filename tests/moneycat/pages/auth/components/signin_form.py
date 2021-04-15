@@ -13,19 +13,16 @@ class SignInForm(Component):
         href_to_signin = 'a[class="signin-link"]'
         error_message = 'p[class="field__error"]'
         href_to_signup = 'a[class="signup-link"]'
-        registration_title = 'h2[class="modal__title"]'
+        registration_title = '[class="modal__title"]'
 
     def go_to_signin(self):
-        self._wait_clickable(By.CSS_SELECTOR, self.Selectors.href_to_signin)
-        return self.driver.find_element_by_css_selector(self.Selectors.href_to_signin).click()
+        self._wait_clickable(By.CSS_SELECTOR, self.Selectors.href_to_signin).click()
 
     def get_account_header(self) -> str:
-        self._wait_clickable(By.CSS_SELECTOR, self.Selectors.account_header)
-        return self.driver.find_element_by_css_selector(self.Selectors.account_header).text
+        return self._wait_clickable(By.CSS_SELECTOR, self.Selectors.account_header).text
 
     def get_error_message(self) -> str:
-        self._wait_visible(By.CSS_SELECTOR, self.Selectors.error_message)
-        return self.driver.find_element_by_css_selector(self.Selectors.error_message).text
+        return self._wait_visible(By.CSS_SELECTOR, self.Selectors.error_message).text
 
     def fill_login(self, username):
         self._fill_input(By.CSS_SELECTOR, self.Selectors.login, username)
@@ -34,13 +31,10 @@ class SignInForm(Component):
         self._fill_input(By.CSS_SELECTOR, self.Selectors.password, password)
 
     def submit(self):
-        self._wait_clickable(By.CSS_SELECTOR, self.Selectors.submit_button)
-        self.driver.find_element_by_css_selector(self.Selectors.submit_button).click()
+        self._wait_clickable(By.CSS_SELECTOR, self.Selectors.submit_button).click()
 
     def click_signup_href(self):
-        self._wait_clickable(By.CSS_SELECTOR, self.Selectors.href_to_signup)
-        self.driver.find_element_by_css_selector(self.Selectors.href_to_signup).click()
+        self._wait_clickable(By.CSS_SELECTOR, self.Selectors.href_to_signup).click()
 
     def get_registration_title(self):
-        self._wait_visible(By.CSS_SELECTOR, self.Selectors.registration_title)
-        return self.driver.find_element_by_css_selector(self.Selectors.registration_title).text
+        return self._wait_visible(By.CSS_SELECTOR, self.Selectors.registration_title).text

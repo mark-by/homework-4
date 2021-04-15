@@ -9,6 +9,7 @@ SELENIUM_BIN = 'bin/selenium.jar'
 TESTS = [
     MoneyCatMainTest,
     MoneyCatConverterTest,
+    MoneyCatRegistrationTest,
     MoneyCatAuthTest,
     MoneyCatSettingsTest,
     TaskListTest,
