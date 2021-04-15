@@ -14,9 +14,6 @@ class AuthPage(Page):
             form.fill_password(password)
             form.submit()
 
-        def go_to_signup(form: SignInForm):
-            form.click_signup_href()
-
     @property
     def form(self):
         return SignInForm(self.driver)

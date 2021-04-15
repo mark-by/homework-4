@@ -3,6 +3,8 @@ from selenium.webdriver.common.by import By
 
 
 class CurrencyList(testutils.Component):
+    container = '.rates-wrapper'
+
     class Selectors:
         first_currency_card = '[class=rate-card]'
         last_currency_card = '[class=rate-card]:last-child'
